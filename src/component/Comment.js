@@ -25,7 +25,7 @@ class Comments extends Component {
 
             </div>
         ))}
-         <button onClick={this.props.changeState}>Go back</button>
+         <button onClick={this.props.qstnPage}>Go back</button>
         </div>
         )
     }

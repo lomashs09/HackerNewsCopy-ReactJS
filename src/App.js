@@ -6,11 +6,13 @@ import Comments from "./component/Comment";
 import stories from "./hn_data/stories";
 import comments from "./hn_data/comments";
 var val = true;
-
+var newStory = stories.sort((a,b)=>{
+  return b.score-a.score
+})
 class App extends Component {
   state = {
     //All Questions
-    question: [...stories.map(story => story)],
+    question: [...newStory.map(story => story)],
     //All Comments
     comments: [...comments.map(comment => comment)]
   };
@@ -39,7 +41,7 @@ class App extends Component {
   };
 
 
-  newPage = itemId => {
+  displayComments = itemId => {
     this.setState({
       question: [
         ...this.state.question.filter(question => {
@@ -62,6 +64,11 @@ class App extends Component {
       comments: [...comments.filter(comment => comment.id === id)]
     });
   };
+//back to Question Page
+  qstnPage = (e) =>{
+    val =true;
+    this.setState({question: [...newStory.map(story => story)]})
+  }
 
 
   render() {
@@ -74,12 +81,13 @@ class App extends Component {
               question={this.state.question}
               decCounter={this.decCounter}
               incCounter={this.incCounter}
-              newPage={this.newPage}
+              displayComments={this.displayComments}
             />
             {(val = !val)}
           </div>
         </div>
       );
+      
     } else {
       return (
         <div className="App">
@@ -89,11 +97,11 @@ class App extends Component {
               question={this.state.question}
               decCounter={this.decCounter}
               incCounter={this.incCounter}
-              newPage={this.newPage}
+              displayComments={this.displayComments}
             />
             <Comments
               comments={this.state.comments}
-              changeState={this.changeState}
+              qstnPage={this.qstnPage}
               addComment={this.addComment}
             />
           </div>

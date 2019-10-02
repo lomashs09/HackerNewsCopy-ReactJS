@@ -12,7 +12,7 @@ class Question extends Component {
           <div className="address-submission">
             <address>|{question.by}</address>
             <p>|{question.submission_time}</p>
-          <p onClick ={this.props.newPage.bind(this,question.item_id)}>|{question.descendants} comments|</p>
+          <p onClick ={this.props.displayComments.bind(this,question.item_id)}>|{question.descendants} comments|</p>
           </div>
         </div>
         <div className="btn-score">
